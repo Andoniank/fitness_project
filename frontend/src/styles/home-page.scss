@@ -1,0 +1,106 @@
+body {
+    background-color: rgba(127, 240, 255, 0.651) ;
+}
+
+.container {
+    display: flex;
+}
+
+.sub-container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 0.7em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(46, 46, 46, 0.5);
+    font-style: oblique;
+    font-variant: small-caps;
+    color: #186b38;
+    font-size: 40px;
+}
+
+h3 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(46, 46, 46, 0.5);
+    font-style: oblique;
+    font-variant: small-caps;
+    font-size: 30px;
+    color: #186b38;
+}
+
+.muscle-image {
+    width: 600px;
+    height: 600px;
+    margin-right: 20px;
+    padding-left: 10%;
+    padding-top: 3%;
+    image-rendering: optimizeSpeed;
+}
+
+p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#workout-display {
+    flex: 3;
+    text-align: center;
+}
+
+.workouts {
+    text-align: center;
+    flex: 1;
+    padding-top: 3%;
+}
+
+.workout-buttons {
+    background-color: #25a79c;
+    padding: 1%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    text-align: center;
+    margin: 3px;
+    transition: 0.3s;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.workout-buttons:hover {
+    background-color: rgb(28, 128, 128);
+}
+
+.workout-buttons:active {
+    background-color: #25a79c;
+}
+
+.muscle-groups-button {
+    padding: 10px 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: 5px;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    background-color: #04AA6D;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    transition: 0.3s;
+}
+
+.muscle-groups-button:hover {
+    background-color: #3e8e41;
+}
+
+.muscle-groups-button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
