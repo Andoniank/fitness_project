@@ -7,4 +7,9 @@ import * as render from './render.js'
 //both are calle from api.js
 api.getMuscleGroups()
 api.getBaseImage()
+    .then((baseImage) => {
+        const blob = new Blob([baseImage], {type:'image/png'})
+        console.log(blob)
+        render.renderBaseImg(blob)
+    })
 

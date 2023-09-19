@@ -35,9 +35,13 @@ export const renderMuscleGroups = (array) => {
 // renders the stock image with no muscle group selected
 export const renderBaseImg = url => {
     const imageUrl = URL.createObjectURL(url)
-    const newImg = document.querySelector(".muscle-image")
+    // console.log(imageUrl)
+    const newImg = document.createElement("img")
+    const container = document.querySelector(".container")
     newImg.src = imageUrl
-    muscleDisplay.appendChild(newImg)
+    console.log(newImg)
+    container.appendChild(newImg)
+    // muscleDisplay.appendChild(newImg)
 }
 
 

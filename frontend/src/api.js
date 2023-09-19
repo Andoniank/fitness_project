@@ -33,8 +33,10 @@ export const getBaseImage = async () => {
         });
         let baseImage
         if (response.ok) {
-            baseImage = await response.blob();
-            render.renderBaseImg(baseImage)
+            baseImage = response.blob();
+            console.log(baseImage)
+            // render.renderBaseImg(baseImage)
+            return baseImage
         } else {
             throw response
         }

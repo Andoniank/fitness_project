@@ -20,10 +20,12 @@ app.get("/baseImage", (req, res) => {
       headers: {
         'X-RapidAPI-Key': process.env.RAPID_API_KEY,
         'X-RapidAPI-Host': 'muscle-group-image-generator.p.rapidapi.com',
-        'responseType': 'blob'
-      }
+        
+      },
+      responseType: 'blob'
     })
-    .then(data => res.send(data.data));
+    .then(data => {
+      res.send(data.data)});
   } 
 );
 
