@@ -1,12 +1,13 @@
 require('buffer/').Buffer;
 import * as api from './api.js'
 import * as filter from './filter.js'
+import * as display from './display.js'
 
 //Query Selectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const muscleDisplay = document.querySelector(".muscle-image")
 const muscleGroups = document.querySelector('.muscle-groups')
 const workouts = document.querySelector(".workouts")
-const workoutDisplay = document.querySelector("#workout-display")
+const workoutDisplay = document.querySelector(".workout-display")
 
 
 // RENDERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,6 +61,7 @@ export const renderWorkouts = array => {
         workoutButton.id = workout.name
         workoutButton.addEventListener('click', e => {
             e.preventDefault()
+            display.openDisplay()
             api.getWorkoutInfo(workout.muscle).then((workoutInfo) => {renderWorkoutInfo(workoutInfo, workout.name)})
         })
     }
@@ -76,6 +78,14 @@ export const renderWorkoutInfo = (array, name) => {
             const type = workoutDisplay.appendChild(document.createElement("p"))
             const equipment = workoutDisplay.appendChild(document.createElement("p"))
             const description = workoutDisplay.appendChild(document.createElement("p"))
+            const closePage = workoutDisplay.appendChild(document.createElement("button"))
+            closePage.type = "button"
+            closePage.className = "close-page"
+            closePage.textContent = "x"
+            closePage.addEventListener("click", e => {
+                clearWorkoutInfo()
+                display.closeDisplay()
+            })
             title.textContent =  workout.name
             type.textContent = "type: " + filter.filterType(workout.type)
             equipment.textContent = "equipment needed: " + filter.filterEquipment(workout.equipment)
@@ -104,3 +114,5 @@ export const clearWorkoutInfo = () => {
         workoutDisplay.removeChild(workoutDisplay.firstChild)
     }
 }
+
+
