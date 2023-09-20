@@ -10,6 +10,7 @@ const workouts = document.querySelector(".workouts")
 const workoutDisplay = document.querySelector(".workout-display")
 
 
+
 // RENDERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // renders the appropriate muscle group buttons based on the API info passed into it from getMuscleGroups
 // adds event listeners to those buttons that call both getImage and getWorkouts to display both
@@ -21,16 +22,37 @@ export const renderMuscleGroups = (array) => {
         muscleButton.type = 'submit'
         muscleButton.value = filter.filterForMuscleDisplay(musclesForImage)
         muscleButton.className = "muscle-groups-button"
-        muscleButton.id = musclesForImage
+        muscleButton.id = "toggleButton"
         muscleButton.addEventListener('click', e => {
             e.preventDefault();
-            clearWorkouts()
-            clearWorkoutInfo()
-            api.getImage(musclesForImage).then((muscleData) => {renderMuscleImg(muscleData)})
-            api.getWorkouts(musclesForWorkouts).then((workoutNames) => {renderWorkouts(workoutNames)})
+            console.log(e.target.className)
+            isPressed = !isPressed;
+            display.removePressed()
+            if (isPressed) {
+                muscleButton.classList.add('pressed')
+                clearWorkouts()
+                clearWorkoutInfo()
+                api.getImage(musclesForImage).then((muscleData) => {renderMuscleImg(muscleData)})
+                api.getWorkouts(musclesForWorkouts).then((workoutNames) => {renderWorkouts(workoutNames)}) 
+            } else {
+                muscleButton.classList.remove('pressed')
+                clearWorkouts()
+                clearWorkoutInfo()
+            }
         })
     }
 }
+
+//
+const muslceButtonsEventListener = () => {
+    let isPressed = false
+    muscleGroups.addEventListener("click", e => {
+        e.preventDefault()
+        isPressed = !isPressed
+
+    })
+}
+
 
 
 // renders the stock image with no muscle group selected
@@ -52,6 +74,8 @@ export const renderMuscleImg = buffer => {
 // renders the apporpiate workout buttons based on which muscle groups where selected from getWorkouts
 // adds an eventListener to each button that calls getWorkoutInfo, which then displays that workout info based on the muscle and workout name that is sent in
 export const renderWorkouts = array => {
+    const title = workouts.appendChild(document.createElement("h2"))
+    title.textContent = "Workouts"
     for (let i = 0; i < array.length; i++) {
         let workout = array[i]
         const workoutButton = workouts.appendChild(document.createElement("input"))
@@ -79,6 +103,10 @@ export const renderWorkoutInfo = (array, name) => {
             const equipment = workoutDisplay.appendChild(document.createElement("p"))
             const description = workoutDisplay.appendChild(document.createElement("p"))
             const closePage = workoutDisplay.appendChild(document.createElement("button"))
+            const link = workoutDisplay.appendChild(document.createElement("a"))
+            link.target = "blank"
+            link.href = "https://www.youtube.com/results?search_query=" + workout.name
+            link.textContent = workout.name
             closePage.type = "button"
             closePage.className = "close-page"
             closePage.textContent = "x"
