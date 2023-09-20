@@ -22,21 +22,20 @@ app.get("/baseImage", (req, res) => {
         'X-RapidAPI-Host': 'muscle-group-image-generator.p.rapidapi.com',
         
       },
-      responseType: 'blob'
+      responseType: 'arraybuffer'
     })
-    .then(data => {
-      res.send(data.data)});
+    .then(data => res.send(data.data));
   } 
 );
 
 app.get("/image", (req, res) => {
-  const url = `https://muscle-group-image-generator.p.rapidapi.com/getImage?muscleGroups=${req.headers.musclegroup}&color=200%2C100%2C80&transparentBackground=1`;
-  axios.get(url, {
+  axios.get(`https://muscle-group-image-generator.p.rapidapi.com/getImage?muscleGroups=${req.headers.musclegroup}&color=200%2C100%2C80&transparentBackground=1`, {
     headers: {
       'X-RapidAPI-Key': process.env.RAPID_API_KEY,
       'X-RapidAPI-Host': 'muscle-group-image-generator.p.rapidapi.com',
-      'responseType': 'blob'
-    }
+      
+    },
+    responseType: 'arraybuffer'
   })
   .then(data => res.send(data.data));
   } 

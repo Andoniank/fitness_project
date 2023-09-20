@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "In this project, you will be able to interact with a human model, where you can click on different muscle groups  and it will show exercises and workouts associated with that muscle group. A list of different exercises will appear which the user can then choose from. Chooseing an excercise will display a video/gif of that excerise along with a description of how to do it, key notes and takeaways and a reccomended set/rep count.",
   "main": "index.js",
-  "browserslist" : [
+  "browserslist": [
     "defaults"
   ],
   "scripts": {
@@ -25,6 +25,7 @@
     "@babel/core": "^7.22.19",
     "@babel/preset-env": "^7.22.15",
     "babel-loader": "^9.1.3",
+    "buffer": "^6.0.3",
     "core-js": "^3.32.2",
     "css-loader": "^6.8.1",
     "mini-css-extract-plugin": "^2.7.6",

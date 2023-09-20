@@ -1,8 +1,10 @@
+require('buffer/').Buffer;
 import * as api from './api.js'
+import * as filter from './filter.js'
 
 //Query Selectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const muscleDisplay = document.querySelector(".muscle-image")
-const muscleGroups = document.querySelector('#muscle-groups')
+const muscleGroups = document.querySelector('.muscle-groups')
 const workouts = document.querySelector(".workouts")
 const workoutDisplay = document.querySelector("#workout-display")
 
@@ -12,45 +14,37 @@ const workoutDisplay = document.querySelector("#workout-display")
 // adds event listeners to those buttons that call both getImage and getWorkouts to display both
 export const renderMuscleGroups = (array) => {
     for (let i = 0; i < array.length; i++) {
-        let muscleGroup = array[i]
+        let musclesForWorkouts = filter.filterMsucleNames(array[i])
+        let musclesForImage = array[i]
         const muscleButton = muscleGroups.appendChild(document.createElement("input"))
         muscleButton.type = 'submit'
-        // if (array[i] === "abs") {
-        //     array[i] = "abdominals"
-        // }
-        muscleButton.value = muscleGroup
+        muscleButton.value = filter.filterForMuscleDisplay(musclesForImage)
         muscleButton.className = "muscle-groups-button"
-        muscleButton.id = muscleGroup
+        muscleButton.id = musclesForImage
         muscleButton.addEventListener('click', e => {
             e.preventDefault();
             clearWorkouts()
             clearWorkoutInfo()
-            api.getImage(muscleGroup)
-            api.getWorkouts(muscleGroup)
+            api.getImage(musclesForImage).then((muscleData) => {renderMuscleImg(muscleData)})
+            api.getWorkouts(musclesForWorkouts).then((workoutNames) => {renderWorkouts(workoutNames)})
         })
     }
 }
 
 
 // renders the stock image with no muscle group selected
-export const renderBaseImg = url => {
-    const imageUrl = URL.createObjectURL(url)
-    // console.log(imageUrl)
-    const newImg = document.createElement("img")
-    const container = document.querySelector(".container")
-    newImg.src = imageUrl
-    console.log(newImg)
-    container.appendChild(newImg)
-    // muscleDisplay.appendChild(newImg)
+export const renderBaseImg = buffer => {
+    const imageUrl = URL.createObjectURL(buffer)
+    const newImg = document.querySelector(".muscle-image")
+    muscleDisplay.src = imageUrl
 }
 
 
 // renders the muscle image with the appropriate muscles highlighted
-export const renderMuscleImg = url => {
-    const imageUrl = URL.createObjectURL(url)
-    // const newImg = document.querySelector(".muscle-image")
-    muscleDisplay.src = imageUrl
-    // muscleDisplay.appendChild(newImg)
+export const renderMuscleImg = buffer => {
+    const imageUrl = URL.createObjectURL(buffer)
+    const newImg = document.querySelector(".muscle-image")
+    newImg.src = imageUrl
 }
 
 
@@ -66,7 +60,7 @@ export const renderWorkouts = array => {
         workoutButton.id = workout.name
         workoutButton.addEventListener('click', e => {
             e.preventDefault()
-            api.getWorkoutInfo(workout.muscle, workout.name)
+            api.getWorkoutInfo(workout.muscle).then((workoutInfo) => {renderWorkoutInfo(workoutInfo, workout.name)})
         })
     }
 }
@@ -83,8 +77,8 @@ export const renderWorkoutInfo = (array, name) => {
             const equipment = workoutDisplay.appendChild(document.createElement("p"))
             const description = workoutDisplay.appendChild(document.createElement("p"))
             title.textContent =  workout.name
-            type.textContent = "type: " + workout.type
-            equipment.textContent = "equipment needed: " + workout.equipment
+            type.textContent = "type: " + filter.filterType(workout.type)
+            equipment.textContent = "equipment needed: " + filter.filterEquipment(workout.equipment)
             description.textContent = "instructions: " + workout.instructions
         }      
     } 

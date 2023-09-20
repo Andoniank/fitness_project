@@ -14,7 +14,7 @@ export const getMuscleGroups = async () => {
         let muscleGroups
         if(response.ok) {
             muscleGroups = await response.json()
-            render.renderMuscleGroups(muscleGroups)
+            return muscleGroups
         } else {
             throw response
         }
@@ -33,9 +33,7 @@ export const getBaseImage = async () => {
         });
         let baseImage
         if (response.ok) {
-            baseImage = response.blob();
-            console.log(baseImage)
-            // render.renderBaseImg(baseImage)
+            baseImage = await response.blob();
             return baseImage
         } else {
             throw response
@@ -59,7 +57,7 @@ export const getImage = async (muscleGroup) => {
         let muscleData
         if (response.ok) {
             muscleData = await response.blob();
-            render.renderMuscleImg(muscleData)
+            return muscleData
         } else {
             throw response
         }
@@ -82,8 +80,7 @@ export const getWorkouts = async (muscle) => {
         let workouts
         if (response.ok) {
             workouts = await response.json();
-            
-            render.renderWorkouts(workouts)
+            return workouts
         } else {
             throw response
         }
@@ -94,7 +91,7 @@ export const getWorkouts = async (muscle) => {
 
 // gets the array of workout objects which is sent to renderWorkoutInfo in render.js where the appropriate info is selected.
 // gets called in renderWorkouts in render.js if the appropiate workout button is pressed.
-export const getWorkoutInfo = async (muscle, name) => {
+export const getWorkoutInfo = async (muscle) => {
     const url = process.env.NODE_ENV === 'production' ? '/workoutInfo' : 'http://localhost:5001/workoutInfo';
     try {
         const response = await fetch(url, {
@@ -106,7 +103,7 @@ export const getWorkoutInfo = async (muscle, name) => {
         let workoutInfo
         if (response.ok) {
             workoutInfo = await response.json();
-            render.renderWorkoutInfo(workoutInfo, name)
+            return workoutInfo
         } else {
             throw response
         }

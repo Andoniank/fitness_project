@@ -1,15 +1,15 @@
+//homepage
 import * as api from './api.js'
 import * as render from './render.js'
 
 
-//homepage
+//muscle groups
+const muscles = ["abs", "abductors", "adductors", "biceps", "calfs", "chest", "forearms", "gluteus", "hamstring", "latissimus", "back_lower", "neck", "quadriceps", "triceps", "back_upper"]
 
-//both are calle from api.js
-api.getMuscleGroups()
+//renders muscles groups and the base image on the website load
+render.renderMuscleGroups(muscles)
 api.getBaseImage()
     .then((baseImage) => {
-        const blob = new Blob([baseImage], {type:'image/png'})
-        console.log(blob)
-        render.renderBaseImg(blob)
+        render.renderBaseImg(baseImage)
     })
 
