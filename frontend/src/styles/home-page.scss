@@ -1,3 +1,33 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 10px;
+}
+
+.header-div {
+    flex: 1;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.github {
+    width: 40px;
+    height: 40px;
+    float: right;
+}
+
+.linkedin {
+    width: 40px;
+    height: 40px;
+    float: right;
+}
+
 body {
     background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
     font-family: "Lato";
@@ -19,6 +49,12 @@ h1 {
     font-variant: small-caps;
     color: #000000;
     font-size: 40px;
+    margin-bottom: 15px;
+    position: static;
+    clear: both;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 h2 {
@@ -119,7 +155,7 @@ p {
 
 .workouts {
     width: 600px;
-    margin-left: 250px;
+    margin-left: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -134,7 +170,7 @@ p {
     background-image: linear-gradient(to top, #6a85b6 0%, #566f99 100%);
     background-blend-mode: multiply,multiply;
     padding: 2%;
-    width: 350px;
+    width: 400px;
     font-size: 16px;
     text-align: center;
     margin: 3px;
@@ -155,8 +191,8 @@ p {
 }
 
 .muscle-groups-button {
-    width: 210px;
-    height: 60px;
+    width: 180px;
+    height: 50px;
     padding: 10px 25px;
     font-size: 20px;
     font-weight: 600;
