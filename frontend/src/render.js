@@ -111,12 +111,20 @@ export const renderWorkoutInfo = (array, name) => {
     for (let i = 0; i < array.length; i++) {
         let workout = array[i]
         if(workout.name === name) {
-            const title = workoutDisplay.appendChild(document.createElement("h3"))
-            const type = workoutDisplay.appendChild(document.createElement("p"))
-            const equipment = workoutDisplay.appendChild(document.createElement("p"))
-            const description = workoutDisplay.appendChild(document.createElement("p"))
             const closePage = workoutDisplay.appendChild(document.createElement("button"))
+            const title = workoutDisplay.appendChild(document.createElement("h2"))
+            const typeTitle = workoutDisplay.appendChild(document.createElement("h3"))
+            const type = workoutDisplay.appendChild(document.createElement("p"))
+            const equipmentTitle = workoutDisplay.appendChild(document.createElement("h3"))
+            const equipment = workoutDisplay.appendChild(document.createElement("p"))
+            const descriptionTitle = workoutDisplay.appendChild(document.createElement("h3"))
+            const description = workoutDisplay.appendChild(document.createElement("p"))
+            const videoTitle = workoutDisplay.appendChild(document.createElement("h3"))
             const link = workoutDisplay.appendChild(document.createElement("a"))
+            typeTitle.textContent = "Type"
+            equipmentTitle.textContent = "Equipment Needed"
+            descriptionTitle.textContent = "Description"
+            videoTitle.textContent = "Video Search"
             link.target = "blank"
             link.href = "https://www.youtube.com/results?search_query=" + workout.name
             link.textContent = workout.name
@@ -128,9 +136,9 @@ export const renderWorkoutInfo = (array, name) => {
                 display.closeDisplay()
             })
             title.textContent =  workout.name
-            type.textContent = "type: " + filter.filterType(workout.type)
-            equipment.textContent = "equipment needed: " + filter.filterEquipment(workout.equipment)
-            description.textContent = "instructions: " + workout.instructions
+            type.textContent = filter.filterType(workout.type)
+            equipment.textContent = filter.filterEquipment(workout.equipment)
+            description.textContent = workout.instructions
         }      
     } 
 }

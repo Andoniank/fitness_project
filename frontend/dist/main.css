@@ -2,7 +2,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/home-page.scss ***!
   \*********************************************************************************************************/
 body {
-    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    font-family: "Lato";
+    height: 100%;
+    width: 100%;
 }
 
 .container {
@@ -15,57 +18,61 @@ body {
 
 h1 {
     text-align: center;
-    padding-bottom: 0.7em;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-shadow: 2px 2px 4px rgba(46, 46, 46, 0.5);
-    font-style: oblique;
     font-variant: small-caps;
-    color: #186b38;
+    color: #000000;
     font-size: 40px;
 }
 
 h2 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-shadow: 2px 2px 4px rgba(46, 46, 46, 0.5);
-    font-style: oblique;
     font-variant: small-caps;
     font-size: 30px;
-    color: #186b38;
+    color: #000000;
     text-align: center;
 }
 
+.workout-display > h2 {
+    font-size: 50px;
+    border-bottom: 2px solid black ;
+    margin-bottom: 10px;
+}
+
 h3 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-shadow: 2px 2px 4px rgba(46, 46, 46, 0.5);
-    font-style: oblique;
     font-variant: small-caps;
-    font-size: 30px;
-    color: #186b38;
+    font-size: 25px;
+    color: #000000;
+    margin: 0;
 }
 
 .muscle-image {
     width: 600px;
     height: 600px;
     margin-right: 20px;
-    padding-left: 10%;
-    padding-top: 3%;
+    margin-left: 12%;
+    margin-bottom: 60px;
+    padding-top: 1%;
     image-rendering: optimizeSpeed;
 }
 
 p {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 5px;
+    margin-bottom: 20px;
+    color: #202b33;
+    font-size: 18px;
 }
 
 .workout-display {
-    width: 600px;
-    background: lightblue;
+    width: 1000px;
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
     border-radius: 10px;
     position: absolute;
     top: 0%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.1);
     text-align: center;
-    padding: 0 30px 30px;
+    padding: 50px 50px;
     color: #333;
     visibility: hidden;
     transition: transform 0.4s, top 0.4s;
@@ -78,17 +85,44 @@ p {
 }
 
 .close-page {
-    position: absolute;
-    bottom: 90%;
-    left: 90%;
-    border-radius: 4px;
-    background-color: red;
+    overflow: hidden;
+	position: relative;
+	border: none;
+	padding: 0;
+    left: 50%;
+	width: 2em; height: 2em;
+	border-radius: 50%;
+	background: transparent;
+	color: #1da1f2;
+	text-indent: 100%;
+	cursor: pointer;
+	
+	&:focus {
+		outline: solid 0 transparent;
+		box-shadow: 0 0 0 2px #39464e
+	}
+	
+	&:hover {
+		background: rgba(45, 203, 224, 0.301)
+	}
+	
+	&:before, &:after {
+		position: absolute;
+		top: 15%; left: calc(50% - .0625em);
+		width: .125em; height: 70%;
+		border-radius: .125em;
+		transform: rotate(45deg);
+		background: currentcolor;
+		content: ''
+	}
+	
+	&:after { transform: rotate(-45deg); }
 }
 
 
 .workouts {
-    width: 900px;
-    margin: auto;
+    width: 600px;
+    margin-left: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -100,11 +134,11 @@ p {
 }
 
 .workout-buttons {
-    background-color: #25a79c;
+    background-image: linear-gradient(to top, #6a85b6 0%, #566f99 100%);
+    background-blend-mode: multiply,multiply;
     padding: 2%;
     width: 350px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     text-align: center;
     margin: 3px;
     transition: 0.3s;
@@ -127,7 +161,6 @@ p {
     width: 210px;
     height: 60px;
     padding: 10px 25px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
     font-weight: 600;
     background: linear-gradient(0deg, rgb(103, 211, 253) 0%,rgb(64, 159, 255) 100%);
