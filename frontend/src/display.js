@@ -1,11 +1,15 @@
-let muscleDisplay = document.getElementById("workout-display")
+const workoutDisplay = document.getElementById("workout-display")
+const modal = document.getElementById("modal");
 
 
 export const openDisplay = () => {
-    muscleDisplay.classList.add("open-display")
+    workoutDisplay.style.zIndex = 3;
+    workoutDisplay.classList.add("open-display");
+    modal.style.visibility = "visible"
 }
 
 export const closeDisplay = () => {
-    muscleDisplay.classList.remove("open-display")
+    workoutDisplay.classList.remove("open-display")
+    modal.style.visibility = "hidden"
 }
 

@@ -9,6 +9,7 @@ const muscleDisplay = document.querySelector(".muscle-image")
 const muscleGroups = document.querySelector('.muscle-groups')
 const workouts = document.querySelector(".workouts")
 const workoutDisplay = document.querySelector(".workout-display")
+const modal = document.getElementById("modal");
 
 
 
@@ -33,36 +34,21 @@ export const renderMuscleGroups = (array) => {
 const muslceButtonsEventListener = () => {
     const removePressed = () => {
         const muscleGroupsButtons = document.getElementsByClassName("muscle-groups-button")
-        console.log(muscleGroupsButtons)
-        // const clickedButton = Array.from(muscleGroupsButtons).filter((button) => {
-        //     button.classList.includes("pressed")
-        // })
         Array.from(muscleGroupsButtons).forEach((button) => {
             button.classList.remove("pressed")
         })
-        console.log(Array.from(muscleGroupsButtons).map(ele => ele.classList))
     }
-    // let isPressed = false
+    
     muscleGroups.addEventListener("click", e => {
         e.preventDefault()
-        // isPressed = !isPressed
         removePressed()
-        e.target.classList.add('pressed')
-        // if (isPressed) {
-        //     e.target.classList.add('pressed')
+        if (e.target.matches("input")) {
+            e.target.classList.add('pressed') 
             clearWorkouts()
             clearWorkoutInfo()
             api.getImage(e.target.dataset.musclesForImage).then((muscleData) => {renderMuscleImg(muscleData)})
             api.getWorkouts(e.target.dataset.musclesForWorkouts).then((workoutNames) => {renderWorkouts(workoutNames)}) 
-        // } else {
-        //     e.target.classList.remove('pressed')
-        //     clearWorkouts()
-        //     clearWorkoutInfo()
-        //     api.getBaseImage()
-        //         .then((baseImage) => {
-        //             renderBaseImg(baseImage)
-        //         })
-        // }
+        }
     })
 }
 
@@ -131,6 +117,12 @@ export const renderWorkoutInfo = (array, name) => {
             closePage.type = "button"
             closePage.className = "close-page"
             closePage.textContent = "x"
+            modal.addEventListener("click", e => {
+                if(e.target === modal) {
+                    display.closeDisplay()
+                }
+                
+            })
             closePage.addEventListener("click", e => {
                 clearWorkoutInfo()
                 display.closeDisplay()
