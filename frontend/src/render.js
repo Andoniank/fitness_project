@@ -3,6 +3,7 @@ import * as api from './api.js'
 import * as filter from './filter.js'
 import * as display from './display.js'
 
+
 //Query Selectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const muscleDisplay = document.querySelector(".muscle-image")
 const muscleGroups = document.querySelector('.muscle-groups')
@@ -22,25 +23,10 @@ export const renderMuscleGroups = (array) => {
         muscleButton.type = 'submit'
         muscleButton.value = filter.filterForMuscleDisplay(musclesForImage)
         muscleButton.className = "muscle-groups-button"
-        muscleButton.id = "toggleButton"
-        muscleButton.addEventListener('click', e => {
-            e.preventDefault();
-            console.log(e.target.className)
-            isPressed = !isPressed;
-            display.removePressed()
-            if (isPressed) {
-                muscleButton.classList.add('pressed')
-                clearWorkouts()
-                clearWorkoutInfo()
-                api.getImage(musclesForImage).then((muscleData) => {renderMuscleImg(muscleData)})
-                api.getWorkouts(musclesForWorkouts).then((workoutNames) => {renderWorkouts(workoutNames)}) 
-            } else {
-                muscleButton.classList.remove('pressed')
-                clearWorkouts()
-                clearWorkoutInfo()
-            }
-        })
+        muscleButton.dataset.musclesForWorkouts = musclesForWorkouts
+        muscleButton.dataset.musclesForImage = musclesForImage
     }
+    muslceButtonsEventListener()
 }
 
 //
@@ -49,7 +35,22 @@ const muslceButtonsEventListener = () => {
     muscleGroups.addEventListener("click", e => {
         e.preventDefault()
         isPressed = !isPressed
-
+        display.removePressed()
+        if (isPressed) {
+            e.target.classList.add('pressed')
+            clearWorkouts()
+            clearWorkoutInfo()
+            api.getImage(e.target.dataset.musclesForImage).then((muscleData) => {renderMuscleImg(muscleData)})
+            api.getWorkouts(e.target.dataset.musclesForWorkouts).then((workoutNames) => {renderWorkouts(workoutNames)}) 
+        } else {
+            e.target.classList.remove('pressed')
+            clearWorkouts()
+            clearWorkoutInfo()
+            api.getBaseImage()
+                .then((baseImage) => {
+                    renderBaseImg(baseImage)
+                })
+        }
     })
 }
 

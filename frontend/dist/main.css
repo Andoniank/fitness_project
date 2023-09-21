@@ -2,7 +2,7 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/home-page.scss ***!
   \*********************************************************************************************************/
 body {
-    background-color: whitesmoke;
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
 }
 
 .container {
