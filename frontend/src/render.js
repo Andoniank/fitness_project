@@ -31,26 +31,38 @@ export const renderMuscleGroups = (array) => {
 
 //
 const muslceButtonsEventListener = () => {
-    let isPressed = false
+    const removePressed = () => {
+        const muscleGroupsButtons = document.getElementsByClassName("muscle-groups-button")
+        console.log(muscleGroupsButtons)
+        // const clickedButton = Array.from(muscleGroupsButtons).filter((button) => {
+        //     button.classList.includes("pressed")
+        // })
+        Array.from(muscleGroupsButtons).forEach((button) => {
+            button.classList.remove("pressed")
+        })
+        console.log(Array.from(muscleGroupsButtons).map(ele => ele.classList))
+    }
+    // let isPressed = false
     muscleGroups.addEventListener("click", e => {
         e.preventDefault()
-        isPressed = !isPressed
-        display.removePressed()
-        if (isPressed) {
-            e.target.classList.add('pressed')
+        // isPressed = !isPressed
+        removePressed()
+        e.target.classList.add('pressed')
+        // if (isPressed) {
+        //     e.target.classList.add('pressed')
             clearWorkouts()
             clearWorkoutInfo()
             api.getImage(e.target.dataset.musclesForImage).then((muscleData) => {renderMuscleImg(muscleData)})
             api.getWorkouts(e.target.dataset.musclesForWorkouts).then((workoutNames) => {renderWorkouts(workoutNames)}) 
-        } else {
-            e.target.classList.remove('pressed')
-            clearWorkouts()
-            clearWorkoutInfo()
-            api.getBaseImage()
-                .then((baseImage) => {
-                    renderBaseImg(baseImage)
-                })
-        }
+        // } else {
+        //     e.target.classList.remove('pressed')
+        //     clearWorkouts()
+        //     clearWorkoutInfo()
+        //     api.getBaseImage()
+        //         .then((baseImage) => {
+        //             renderBaseImg(baseImage)
+        //         })
+        // }
     })
 }
 
